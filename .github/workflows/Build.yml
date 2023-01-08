@@ -35,64 +35,64 @@ env:
 #--------------------------------------------------------------------------------
 
 jobs:
-  build-linux:
-    runs-on: ubuntu-20.04
-    name: '🐧 Ubuntu 20.04'
-    steps:
-    - name: '🧰 Checkout'
-      uses: actions/checkout@v2
-      with:
-        submodules: recursive
+  # build-linux:
+  #   runs-on: ubuntu-20.04
+  #   name: '🐧 Ubuntu 20.04'
+  #   steps:
+  #   - name: '🧰 Checkout'
+  #     uses: actions/checkout@v2
+  #     with:
+  #       submodules: recursive
 
-    - name: '⚙️ Cache Qt'
-      id: cache-qt
-      uses: actions/cache@v1
-      with:
-        path: ../Qt
-        key: ${{runner.os}}-qtcachedir-${{env.QT_VERSION}}
+  #   - name: '⚙️ Cache Qt'
+  #     id: cache-qt
+  #     uses: actions/cache@v1
+  #     with:
+  #       path: ../Qt
+  #       key: ${{runner.os}}-qtcachedir-${{env.QT_VERSION}}
 
-    - name: '⚙️ Install Qt'
-      uses: jurplel/install-qt-action@v2
-      with:
-        version: ${{env.QT_VERSION}}
-        modules: ${{env.QT_MODULES}}
-        aqtversion: '==2.0.0'
-        cached: ${{steps.cache-qt.outputs.cache-hit}}
+  #   - name: '⚙️ Install Qt'
+  #     uses: jurplel/install-qt-action@v2
+  #     with:
+  #       version: ${{env.QT_VERSION}}
+  #       modules: ${{env.QT_MODULES}}
+  #       aqtversion: '==2.0.0'
+  #       cached: ${{steps.cache-qt.outputs.cache-hit}}
 
-    # Install additional dependencies, stolen from:
-    # https://github.com/mapeditor/tiled/blob/master/.github/workflows/packages.yml
-    - name: '⚙️ Install dependencies'
-      run: |
-        sudo apt-get update
-        sudo apt-get install libgl1-mesa-dev libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libzstd-dev
+  #   # Install additional dependencies, stolen from:
+  #   # https://github.com/mapeditor/tiled/blob/master/.github/workflows/packages.yml
+  #   - name: '⚙️ Install dependencies'
+  #     run: |
+  #       sudo apt-get update
+  #       sudo apt-get install libgl1-mesa-dev libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 libzstd-dev
 
-    - name: '🚧 Compile application'
-      run: |
-        ${{env.QMAKE}} ${{env.QMAKE_PROJECT}} CONFIG+=release PREFIX=/usr
-        make -j${{env.CORES}}
+  #   - name: '🚧 Compile application'
+  #     run: |
+  #       ${{env.QMAKE}} ${{env.QMAKE_PROJECT}} CONFIG+=release PREFIX=/usr
+  #       make -j${{env.CORES}}
 
-    - name: '⚙️ Install linuxdeploy'
-      run: |
-        wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
-        wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
-        chmod +x linuxdeploy-x86_64.AppImage
-        chmod +x linuxdeploy-plugin-qt-x86_64.AppImage
+  #   - name: '⚙️ Install linuxdeploy'
+  #     run: |
+  #       wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+  #       wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+  #       chmod +x linuxdeploy-x86_64.AppImage
+  #       chmod +x linuxdeploy-plugin-qt-x86_64.AppImage
 
-    - name: '📦 Create AppImage'
-      run: |
-        export QML_SOURCES_PATHS="${{env.QML_DIR_NIX}}"
-        export QMAKE=/home/runner/work/${{env.REPO_NAME}}/Qt/${{env.QT_VERSION}}/gcc_64/bin/${{env.QMAKE}}
-        export PATH=/home/runner/work/${{env.REPO_NAME}}/Qt/${{env.QT_VERSION}}/gcc_64/libexec:$PATH
-        ./linuxdeploy-x86_64.AppImage --appdir AppDir -e ${{env.UNIXNAME}} -i deploy/linux/${{env.UNIXNAME}}.png -d deploy/linux/${{env.UNIXNAME}}.desktop --plugin qt --output appimage
-        rm linuxdeploy-x86_64.AppImage
-        rm linuxdeploy-plugin-qt-x86_64.AppImage
-        mv *.AppImage ${{env.EXECUTABLE}}-${{env.VERSION}}-Linux.AppImage
-          
-    - name: '📤 Upload artifact: AppImage'
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{env.EXECUTABLE}}-${{env.VERSION}}-Linux.AppImage
-        path: ${{env.EXECUTABLE}}-${{env.VERSION}}-Linux.AppImage
+  #   - name: '📦 Create AppImage'
+  #     run: |
+  #       export QML_SOURCES_PATHS="${{env.QML_DIR_NIX}}"
+  #       export QMAKE=/home/runner/work/${{env.REPO_NAME}}/Qt/${{env.QT_VERSION}}/gcc_64/bin/${{env.QMAKE}}
+  #       export PATH=/home/runner/work/${{env.REPO_NAME}}/Qt/${{env.QT_VERSION}}/gcc_64/libexec:$PATH
+  #       ./linuxdeploy-x86_64.AppImage --appdir AppDir -e ${{env.UNIXNAME}} -i deploy/linux/${{env.UNIXNAME}}.png -d deploy/linux/${{env.UNIXNAME}}.desktop --plugin qt --output appimage
+  #       rm linuxdeploy-x86_64.AppImage
+  #       rm linuxdeploy-plugin-qt-x86_64.AppImage
+  #       mv *.AppImage ${{env.EXECUTABLE}}-${{env.VERSION}}-Linux.AppImage
+  #         
+  #   - name: '📤 Upload artifact: AppImage'
+  #     uses: actions/upload-artifact@v2
+  #     with:
+  #       name: ${{env.EXECUTABLE}}-${{env.VERSION}}-Linux.AppImage
+  #       path: ${{env.EXECUTABLE}}-${{env.VERSION}}-Linux.AppImage
 
   # macOS build
   build-mac:
