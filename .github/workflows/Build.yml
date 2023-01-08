@@ -22,7 +22,7 @@ env:
   APPLICATION: "Audibly"
   REPO_NAME: "Audibly-CrossPlatform"
   UNIXNAME: "audibly"
-  QMAKE_PROJECT: "audibly.pro"
+  QMAKE_PROJECT: "Audibly.pro"
   QML_DIR_NIX: "assets/qml"
   QML_DIR_WIN: "assets\\qml"
   PUBLISHER: "Ryan Stewart"
