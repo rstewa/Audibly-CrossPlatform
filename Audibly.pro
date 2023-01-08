@@ -14,7 +14,7 @@ CONFIG += c++11
 #-------------------------------------------------------------------------------
 
 TEMPLATE = app
-TARGET = QtApp
+TARGET = Audibly
 
 CONFIG += qtc_runnable
 CONFIG += resources_big

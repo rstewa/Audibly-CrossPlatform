@@ -30,3 +30,6 @@ Temporary Items
 *.pro.user
 .vscode
 build
+.qmake.stash
+Makefile
+assets_assets_qmlcache.qrc
