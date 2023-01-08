@@ -33,3 +33,11 @@ build
 .qmake.stash
 Makefile
 assets_assets_qmlcache.qrc
+qmlcache_loader.cpp
+assets_qml_main_qml.cpp
+assets_qml_UI_qml.cpp
+Audibly.app
+moc
+obj
+qrc
+uic
