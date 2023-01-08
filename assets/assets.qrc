@@ -12,6 +12,6 @@
         <file>icons/update.svg</file>
         <file>icons/website.svg</file>
         <file>icons/bug.svg</file>
-        <file>images/icon.svg</file>
+        <file>images/audibly_icon.svg</file>
     </qresource>
 </RCC>

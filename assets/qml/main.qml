@@ -21,7 +21,7 @@
  */
 
 import QtQuick 2.12
-import QtQuick.Dialogs 1.1
+// import QtQuick.Dialogs 1.1
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 
@@ -162,17 +162,20 @@ ApplicationWindow {
     //
     // Enable/disable automatic updates dialog
     //
-    MessageDialog {
+    Dialog {
         id: automaticUpdatesMessageDialog
-
         title: Cpp_AppName
-        icon: StandardIcon.Question
-        modality: Qt.ApplicationModal
-        standardButtons: StandardButton.Yes | StandardButton.No
-        text: "<h3>" + qsTr("Check for updates automatically?") + "</h3>"
-        informativeText: qsTr("Should %1 automatically check for updates? " +
-                              "You can always check for updates manually from " +
-                              "the \"About\" dialog").arg(Cpp_AppName);
+        // icon: StandardIcon.Question
+        property alias text: ltModal.text
+        contentItem: Text {
+            id: ltModal
+            text: "<h3>" + qsTr("Check for updates automatically?") + "</h3>" + 
+                  "<p>"  + qsTr("Should %1 automatically check for updates? " +
+                                  "You can always check for updates manually from " +
+                                  "the \"About\" dialog").arg(Cpp_AppName) + "</p>" 
+        }
+        modal: true
+        standardButtons: Dialog.Yes | Dialog.No
 
         // Behavior when the user clicks on "Yes"
         onAccepted: {
