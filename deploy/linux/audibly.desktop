@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Audibly
+Comment=Audibly Audiobook Player
+Exec=audibly
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Development;Qt;
+Icon=audibly_logo
