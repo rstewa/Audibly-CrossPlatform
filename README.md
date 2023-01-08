@@ -4,7 +4,7 @@
 
 # Qt App Template
 
-[![Deploy](https://github.com/alex-spataru/QtApp-Template/actions/workflows/Build.yml/badge.svg)](https://github.com/alex-spataru/QtApp-Template/actions/workflows/Build.yml)
+[![Deploy](https://github.com/rstewa35/Audibly-CrossPlatform/actions/workflows/Build.yml/badge.svg)](https://github.com/rstewa35/Audibly-CrossPlatform/actions/workflows/Build.yml)
 
 A simple template for Qt apps with the following features:
 
