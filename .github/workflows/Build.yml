@@ -26,7 +26,7 @@ env:
   QML_DIR_NIX: "assets/qml"
   QML_DIR_WIN: "assets\\qml"
   PUBLISHER: "Ryan Stewart"
-  QT_VERSION: 5.15.2
+  QT_VERSION: 6.4.2 # 5.15.2
   QMAKE: qmake
   CORES: 12
 

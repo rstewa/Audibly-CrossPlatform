@@ -41,3 +41,4 @@ moc
 obj
 qrc
 uic
+qmake_clean.sh
