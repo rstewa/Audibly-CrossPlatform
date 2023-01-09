@@ -6,6 +6,8 @@
 
 [![Deploy](https://github.com/rstewa35/Audibly-CrossPlatform/actions/workflows/Build.yml/badge.svg)](https://github.com/rstewa35/Audibly-CrossPlatform/actions/workflows/Build.yml)
 
+Command to install Qt@6 on Windows using [**aqtinstall**](https://github.com/miurahr/aqtinstall): `aqt install-qt windows desktop 6.2.4 win64_mingw -m all`
+
 A simple template for Qt apps with the following features:
 
 - Code for displaying a QtQuick [`ApplicationWindow`](https://doc.qt.io/qt-5/qml-qtquick-controls2-applicationwindow.html).
