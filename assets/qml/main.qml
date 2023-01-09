@@ -20,10 +20,10 @@
  * THE SOFTWARE.
  */
 
-import QtQuick 2.12
-// import QtQuick.Dialogs 1.1
-import QtQuick.Window 2.12
-import QtQuick.Controls 2.12
+import QtQuick
+import QtQuick.Dialogs
+import QtQuick.Window
+import QtQuick.Controls
 
 import Qt.labs.settings 1.0
 
@@ -138,7 +138,7 @@ ApplicationWindow {
             ++appLaunchStatus
 
         // Second launch ask user if he/she wants to enable automatic updates
-        if (appLaunchStatus == 2)
+        if (appLaunchStatus != 0 /* == 2 */)
             automaticUpdatesMessageDialog.visible = true
 
         // Check for updates (if we are allowed)
@@ -162,6 +162,32 @@ ApplicationWindow {
     //
     // Enable/disable automatic updates dialog
     //
+    MessageDialog {
+        id: automaticUpdatesMessageDialog
+        title: Cpp_AppName
+        // icon: StandardIcon.Question
+        buttons: MessageDialog.Yes | MessageDialog.No
+        text: "<h3>" + qsTr("Check for updates automatically?") + "</h3>"
+        informativeText: qsTr("Should %1 automatically check for updates? " +
+                              "You can always check for updates manually from " +
+                              "the \"About\" dialog").arg(Cpp_AppName);
+
+        // Behavior when the user clicks on "Yes"
+        onAccepted: {
+            app.automaticUpdates = true
+            Cpp_Updater.checkForUpdates(Cpp_AppUpdaterUrl)
+        }
+
+        // Behavior when the user clicks on "No"
+        onRejected: {
+            app.automaticUpdates = false
+        }
+    }
+    
+    //
+    // Enable/disable automatic updates dialog
+    //
+    /*
     Dialog {
         id: automaticUpdatesMessageDialog
         title: Cpp_AppName
@@ -188,6 +214,7 @@ ApplicationWindow {
             app.automaticUpdates = false
         }
     }
+    */
 
     //
     // UI content
