@@ -29,6 +29,7 @@ Temporary Items
 # Qt project file
 *.pro.user
 .vscode
+.idea
 build
 .qmake.stash
 Makefile
